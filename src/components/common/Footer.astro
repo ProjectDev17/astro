@@ -1,0 +1,135 @@
+---
+import { useTranslations } from '../../i18n/ui';
+
+const t = useTranslations('es');
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="footer__container container">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <a href="/" class="footer__logo">
+          Digital<span class="gradient-text">CRM</span>
+        </a>
+        <p class="footer__description">
+          {t('footer.description')}
+        </p>
+      </div>
+
+      <nav class="footer__nav">
+        <h4 class="footer__nav-title">{t('footer.services')}</h4>
+        <ul class="footer__nav-list">
+          <li><a href="#servicios">CRM a la Medida</a></li>
+          <li><a href="#servicios">Automatización</a></li>
+          <li><a href="#servicios">Integraciones</a></li>
+          <li><a href="#servicios">Analytics</a></li>
+        </ul>
+      </nav>
+
+      <nav class="footer__nav">
+        <h4 class="footer__nav-title">{t('footer.company')}</h4>
+        <ul class="footer__nav-list">
+          <li><a href="#que-es">Nosotros</a></li>
+          <li><a href="#como-funciona">Proceso</a></li>
+          <li><a href="#beneficios">Beneficios</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <div class="footer__bottom">
+      <p class="footer__copyright">
+        © {currentYear} DigitalCRM. Todos los derechos reservados.
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--color-bg-secondary);
+    border-top: 1px solid var(--color-border);
+    padding-block: var(--space-16) var(--space-8);
+  }
+
+  .footer__container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-12);
+  }
+
+  .footer__grid {
+    display: grid;
+    gap: var(--space-10);
+  }
+
+  .footer__brand {
+    max-width: 300px;
+  }
+
+  .footer__logo {
+    font-size: var(--text-2xl);
+    font-weight: var(--font-bold);
+    color: var(--color-text-primary);
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: var(--space-4);
+  }
+
+  .footer__description {
+    color: var(--color-text-tertiary);
+    font-size: var(--text-sm);
+    line-height: var(--leading-relaxed);
+  }
+
+  .footer__nav-title {
+    font-size: var(--text-sm);
+    font-weight: var(--font-semibold);
+    color: var(--color-text-primary);
+    margin-bottom: var(--space-4);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wider);
+  }
+
+  .footer__nav-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .footer__nav-list a {
+    color: var(--color-text-tertiary);
+    font-size: var(--text-sm);
+    text-decoration: none;
+    transition: color var(--duration-fast) var(--ease-out);
+  }
+
+  .footer__nav-list a:hover {
+    color: var(--color-accent-cyan);
+  }
+
+  .footer__bottom {
+    padding-top: var(--space-8);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .footer__copyright {
+    color: var(--color-text-muted);
+    font-size: var(--text-sm);
+    text-align: center;
+  }
+
+  @media (min-width: 640px) {
+    .footer__grid {
+      grid-template-columns: 1.5fr 1fr 1fr;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .footer__grid {
+      grid-template-columns: 2fr 1fr 1fr;
+    }
+  }
+</style>

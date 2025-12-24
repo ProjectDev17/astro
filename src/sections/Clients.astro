@@ -1,0 +1,326 @@
+---
+// Clients section with horizontal auto-scrolling carousel
+// Using inline SVG logos for reliability
+---
+
+<section class="clients" id="clientes">
+  <div class="clients__container container">
+    <div class="clients__header">
+      <span class="clients__badge">Confianza</span>
+      <h2 class="clients__title">Empresas que confían en nosotros</h2>
+      <p class="clients__subtitle">Más de 50 empresas han transformado su operación con nuestras soluciones</p>
+    </div>
+
+    <div class="clients__carousel" data-clients-carousel>
+      <div class="clients__track">
+        <!-- First set of logos -->
+        <div class="clients__item">
+          <svg class="clients__logo-svg" viewBox="0 0 100 30" fill="currentColor">
+            <text x="0" y="22" font-size="18" font-weight="700">TechCorp</text>
+          </svg>
+        </div>
+        <div class="clients__item">
+          <svg class="clients__logo-svg" viewBox="0 0 100 30" fill="currentColor">
+            <text x="0" y="22" font-size="18" font-weight="700">Innovex</text>
+          </svg>
+        </div>
+        <div class="clients__item">
+          <svg class="clients__logo-svg" viewBox="0 0 100 30" fill="currentColor">
+            <text x="0" y="22" font-size="18" font-weight="700">DataFlow</text>
+          </svg>
+        </div>
+        <div class="clients__item">
+          <svg class="clients__logo-svg" viewBox="0 0 110 30" fill="currentColor">
+            <text x="0" y="22" font-size="18" font-weight="700">CloudBase</text>
+          </svg>
+        </div>
+        <div class="clients__item">
+          <svg class="clients__logo-svg" viewBox="0 0 100 30" fill="currentColor">
+            <text x="0" y="22" font-size="18" font-weight="700">Nextera</text>
+          </svg>
+        </div>
+        <div class="clients__item">
+          <svg class="clients__logo-svg" viewBox="0 0 100 30" fill="currentColor">
+            <text x="0" y="22" font-size="18" font-weight="700">Synapse</text>
+          </svg>
+        </div>
+        <div class="clients__item">
+          <svg class="clients__logo-svg" viewBox="0 0 100 30" fill="currentColor">
+            <text x="0" y="22" font-size="18" font-weight="700">FinCore</text>
+          </svg>
+        </div>
+        <div class="clients__item">
+          <svg class="clients__logo-svg" viewBox="0 0 100 30" fill="currentColor">
+            <text x="0" y="22" font-size="18" font-weight="700">MedLink</text>
+          </svg>
+        </div>
+        <div class="clients__item">
+          <svg class="clients__logo-svg" viewBox="0 0 100 30" fill="currentColor">
+            <text x="0" y="22" font-size="18" font-weight="700">BuildPro</text>
+          </svg>
+        </div>
+        <div class="clients__item">
+          <svg class="clients__logo-svg" viewBox="0 0 100 30" fill="currentColor">
+            <text x="0" y="22" font-size="18" font-weight="700">RetailX</text>
+          </svg>
+        </div>
+        <!-- Duplicate set for infinite scroll -->
+        <div class="clients__item">
+          <svg class="clients__logo-svg" viewBox="0 0 100 30" fill="currentColor">
+            <text x="0" y="22" font-size="18" font-weight="700">TechCorp</text>
+          </svg>
+        </div>
+        <div class="clients__item">
+          <svg class="clients__logo-svg" viewBox="0 0 100 30" fill="currentColor">
+            <text x="0" y="22" font-size="18" font-weight="700">Innovex</text>
+          </svg>
+        </div>
+        <div class="clients__item">
+          <svg class="clients__logo-svg" viewBox="0 0 100 30" fill="currentColor">
+            <text x="0" y="22" font-size="18" font-weight="700">DataFlow</text>
+          </svg>
+        </div>
+        <div class="clients__item">
+          <svg class="clients__logo-svg" viewBox="0 0 110 30" fill="currentColor">
+            <text x="0" y="22" font-size="18" font-weight="700">CloudBase</text>
+          </svg>
+        </div>
+        <div class="clients__item">
+          <svg class="clients__logo-svg" viewBox="0 0 100 30" fill="currentColor">
+            <text x="0" y="22" font-size="18" font-weight="700">Nextera</text>
+          </svg>
+        </div>
+        <div class="clients__item">
+          <svg class="clients__logo-svg" viewBox="0 0 100 30" fill="currentColor">
+            <text x="0" y="22" font-size="18" font-weight="700">Synapse</text>
+          </svg>
+        </div>
+        <div class="clients__item">
+          <svg class="clients__logo-svg" viewBox="0 0 100 30" fill="currentColor">
+            <text x="0" y="22" font-size="18" font-weight="700">FinCore</text>
+          </svg>
+        </div>
+        <div class="clients__item">
+          <svg class="clients__logo-svg" viewBox="0 0 100 30" fill="currentColor">
+            <text x="0" y="22" font-size="18" font-weight="700">MedLink</text>
+          </svg>
+        </div>
+        <div class="clients__item">
+          <svg class="clients__logo-svg" viewBox="0 0 100 30" fill="currentColor">
+            <text x="0" y="22" font-size="18" font-weight="700">BuildPro</text>
+          </svg>
+        </div>
+        <div class="clients__item">
+          <svg class="clients__logo-svg" viewBox="0 0 100 30" fill="currentColor">
+            <text x="0" y="22" font-size="18" font-weight="700">RetailX</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="clients__stats">
+      <div class="clients__stat-item">
+        <span class="clients__stat-number" data-animate="counter" data-value="50">0</span>
+        <span class="clients__stat-plus">+</span>
+        <span class="clients__stat-label">Clientes activos</span>
+      </div>
+      <div class="clients__stat-divider"></div>
+      <div class="clients__stat-item">
+        <span class="clients__stat-number" data-animate="counter" data-value="120">0</span>
+        <span class="clients__stat-plus">+</span>
+        <span class="clients__stat-label">Proyectos entregados</span>
+      </div>
+      <div class="clients__stat-divider"></div>
+      <div class="clients__stat-item">
+        <span class="clients__stat-number" data-animate="counter" data-value="98">0</span>
+        <span class="clients__stat-percent">%</span>
+        <span class="clients__stat-label">Satisfacción</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .clients {
+    background: var(--color-bg-secondary);
+    padding-block: var(--space-16);
+    overflow: hidden;
+  }
+
+  .clients__container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-12);
+  }
+
+  .clients__header {
+    text-align: center;
+  }
+
+  .clients__badge {
+    display: inline-block;
+    padding: var(--space-2) var(--space-4);
+    font-size: var(--text-sm);
+    font-weight: var(--font-medium);
+    color: var(--color-accent-cyan);
+    background: rgba(0, 212, 255, 0.1);
+    border: 1px solid rgba(0, 212, 255, 0.2);
+    border-radius: var(--radius-full);
+    letter-spacing: var(--tracking-wide);
+    text-transform: uppercase;
+    margin-bottom: var(--space-4);
+  }
+
+  .clients__title {
+    font-size: var(--text-3xl);
+    font-weight: var(--font-bold);
+    color: var(--color-text-primary);
+    margin-bottom: var(--space-3);
+  }
+
+  .clients__subtitle {
+    font-size: var(--text-base);
+    color: var(--color-text-secondary);
+    max-width: 450px;
+    margin-inline: auto;
+  }
+
+  /* Carousel */
+  .clients__carousel {
+    position: relative;
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    mask-image: linear-gradient(
+      90deg,
+      transparent 0%,
+      black 10%,
+      black 90%,
+      transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+      90deg,
+      transparent 0%,
+      black 10%,
+      black 90%,
+      transparent 100%
+    );
+  }
+
+  .clients__track {
+    display: flex;
+    gap: var(--space-8);
+    animation: scroll-left 40s linear infinite;
+    width: max-content;
+  }
+
+  .clients__track:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes scroll-left {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .clients__item {
+    flex-shrink: 0;
+    padding: var(--space-6) var(--space-8);
+    background: var(--color-bg-tertiary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    transition: all var(--duration-normal) var(--ease-out);
+  }
+
+  .clients__item:hover {
+    border-color: var(--color-accent-cyan);
+    background: var(--color-bg-elevated);
+    transform: translateY(-4px);
+    box-shadow: var(--glow-cyan);
+  }
+
+  .clients__logo-svg {
+    width: auto;
+    height: 24px;
+    color: var(--color-text-secondary);
+    opacity: 0.6;
+    transition: all var(--duration-normal) var(--ease-out);
+    font-family: var(--font-sans);
+  }
+
+  .clients__item:hover .clients__logo-svg {
+    color: var(--color-text-primary);
+    opacity: 1;
+  }
+
+  /* Stats */
+  .clients__stats {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-8);
+    flex-wrap: wrap;
+    padding-top: var(--space-8);
+  }
+
+  .clients__stat-item {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-1);
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .clients__stat-number {
+    font-size: var(--text-4xl);
+    font-weight: var(--font-bold);
+    color: var(--color-text-primary);
+    line-height: 1;
+  }
+
+  .clients__stat-plus,
+  .clients__stat-percent {
+    font-size: var(--text-2xl);
+    font-weight: var(--font-bold);
+    color: var(--color-accent-cyan);
+  }
+
+  .clients__stat-label {
+    width: 100%;
+    font-size: var(--text-sm);
+    color: var(--color-text-tertiary);
+    text-align: center;
+    margin-top: var(--space-1);
+  }
+
+  .clients__stat-divider {
+    width: 1px;
+    height: 50px;
+    background: var(--color-border);
+  }
+
+  @media (max-width: 768px) {
+    .clients__stats {
+      gap: var(--space-6);
+    }
+
+    .clients__stat-divider {
+      display: none;
+    }
+
+    .clients__stat-item {
+      flex: 1;
+      min-width: 100px;
+    }
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .clients__track {
+      animation: none;
+    }
+  }
+</style>

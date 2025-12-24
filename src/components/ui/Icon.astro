@@ -1,0 +1,67 @@
+---
+export interface Props {
+  name: string;
+  size?: number;
+  class?: string;
+}
+
+const { name, size = 24, class: className = '' } = Astro.props;
+
+// Icons that use fill instead of stroke
+const fillIcons = ['whatsapp'];
+
+const icons: Record<string, string> = {
+  // Services Icons
+  'crm': `<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>`,
+  'automation': `<path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/><circle cx="12" cy="12" r="3"/>`,
+  'integrations': `<rect x="2" y="6" width="6" height="12" rx="1"/><rect x="16" y="6" width="6" height="12" rx="1"/><path d="M8 12h8"/><path d="M12 8v8"/>`,
+  'analytics': `<path d="M3 3v18h18"/><path d="m7 16 4-4 4 4 5-6"/>`,
+  'ai': `<path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/><path d="M12 6v2"/><path d="M12 16v2"/><path d="m7.8 7.8 1.4 1.4"/><path d="m14.8 14.8 1.4 1.4"/><path d="M6 12h2"/><path d="M16 12h2"/><path d="m7.8 16.2 1.4-1.4"/><path d="m14.8 9.2 1.4-1.4"/>`,
+  
+  // Benefits Icons
+  'scalability': `<path d="M2 20h20"/><path d="M5 20V8l7-5 7 5v12"/><path d="M9 20v-6h6v6"/>`,
+  'security': `<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>`,
+  'performance': `<path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/>`,
+  'customization': `<path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/>`,
+  
+  // Navigation
+  'menu': `<line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/>`,
+  'close': `<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>`,
+  'arrow-right': `<line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>`,
+  'arrow-down': `<line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/>`,
+  'external-link': `<path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>`,
+  
+  // Social - WhatsApp official icon (uses fill)
+  'whatsapp': `<path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2.546 20.2a1 1 0 0 0 1.254 1.254l3.032-.892A9.96 9.96 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm-2.29 5.39c-.197-.46-.405-.469-.592-.477-.153-.007-.329-.006-.505-.006-.176 0-.462.066-.704.33-.242.263-.924.903-.924 2.202 0 1.3.946 2.556 1.078 2.732.132.176 1.826 2.924 4.51 3.98 2.232.879 2.684.704 3.169.66.484-.044 1.562-.639 1.782-1.255.22-.617.22-1.145.154-1.255-.066-.11-.242-.176-.505-.307-.264-.132-1.562-.771-1.804-.859-.242-.088-.418-.132-.594.132-.176.263-.682.859-.836 1.035-.154.176-.308.198-.572.066-.263-.132-1.112-.41-2.12-1.306-.783-.697-1.312-1.559-1.466-1.822-.154-.264-.016-.406.116-.538.119-.118.264-.308.396-.462.132-.154.176-.264.264-.44.088-.176.044-.33-.022-.462-.066-.132-.583-1.43-.813-1.948z"/>`,
+  
+  // Misc
+  'check': `<polyline points="20 6 9 17 4 12"/>`,
+  'star': `<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>`,
+};
+
+const iconPath = icons[name] || '';
+const isFillIcon = fillIcons.includes(name);
+---
+
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width={size}
+  height={size}
+  viewBox="0 0 24 24"
+  fill={isFillIcon ? "currentColor" : "none"}
+  stroke={isFillIcon ? "none" : "currentColor"}
+  stroke-width={isFillIcon ? "0" : "2"}
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class={`icon icon--${name} ${className}`}
+  aria-hidden="true"
+>
+  <Fragment set:html={iconPath} />
+</svg>
+
+<style>
+  .icon {
+    flex-shrink: 0;
+    transition: transform var(--duration-fast) var(--ease-out);
+  }
+</style>

@@ -1,0 +1,176 @@
+---
+import Badge from '../components/ui/Badge.astro';
+import Card from '../components/ui/Card.astro';
+import Icon from '../components/ui/Icon.astro';
+import { useTranslations } from '../i18n/ui';
+
+const t = useTranslations('es');
+
+const services = [
+  {
+    icon: 'crm',
+    title: t('services.crm.title'),
+    description: t('services.crm.description'),
+  },
+  {
+    icon: 'automation',
+    title: t('services.automation.title'),
+    description: t('services.automation.description'),
+  },
+  {
+    icon: 'integrations',
+    title: t('services.integrations.title'),
+    description: t('services.integrations.description'),
+  },
+  {
+    icon: 'analytics',
+    title: t('services.analytics.title'),
+    description: t('services.analytics.description'),
+  },
+  {
+    icon: 'ai',
+    title: t('services.ai.title'),
+    description: t('services.ai.description'),
+  },
+];
+---
+
+<section class="services section" id="servicios" data-animate="section">
+  <div class="services__container container">
+    <div class="services__header">
+      <Badge text={t('services.badge')} />
+      <h2 class="services__title">{t('services.title')}</h2>
+      <p class="services__description">{t('services.description')}</p>
+    </div>
+
+    <div class="services__grid" data-animate="cards">
+      {services.map((service, index) => (
+        <Card variant="glass" class={`services__card ${index === 0 ? 'services__card--featured' : ''}`}>
+          <div class="services__card-icon">
+            <Icon name={service.icon} size={28} />
+          </div>
+          <h3 class="services__card-title">{service.title}</h3>
+          <p class="services__card-description">{service.description}</p>
+        </Card>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .services {
+    background: var(--color-bg-secondary);
+    position: relative;
+  }
+
+  .services::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      var(--color-border) 50%,
+      transparent 100%
+    );
+  }
+
+  .services__container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-12);
+  }
+
+  .services__header {
+    text-align: center;
+    max-width: 600px;
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-4);
+  }
+
+  .services__title {
+    font-size: var(--text-4xl);
+    font-weight: var(--font-bold);
+    line-height: var(--leading-tight);
+  }
+
+  .services__description {
+    font-size: var(--text-lg);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+  }
+
+  .services__grid {
+    display: grid;
+    gap: var(--space-6);
+  }
+
+  .services__card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .services__card-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    background: rgba(0, 212, 255, 0.1);
+    border: 1px solid rgba(0, 212, 255, 0.2);
+    border-radius: var(--radius-lg);
+    color: var(--color-accent-cyan);
+    transition: all var(--duration-normal) var(--ease-out);
+  }
+
+  .services__card:hover .services__card-icon {
+    background: rgba(0, 212, 255, 0.15);
+    transform: scale(1.05);
+    box-shadow: var(--glow-cyan);
+  }
+
+  .services__card-title {
+    font-size: var(--text-xl);
+    font-weight: var(--font-semibold);
+    color: var(--color-text-primary);
+  }
+
+  .services__card-description {
+    font-size: var(--text-base);
+    color: var(--color-text-tertiary);
+    line-height: var(--leading-relaxed);
+  }
+
+  /* Featured Card */
+  :global(.services__card--featured) {
+    grid-column: 1 / -1;
+  }
+
+  @media (min-width: 640px) {
+    .services__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    :global(.services__card--featured) {
+      grid-column: span 2;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .services__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    :global(.services__card--featured) {
+      grid-column: span 1;
+    }
+  }
+</style>

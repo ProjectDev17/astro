@@ -1,0 +1,184 @@
+---
+import Badge from '../components/ui/Badge.astro';
+import Card from '../components/ui/Card.astro';
+import Icon from '../components/ui/Icon.astro';
+import { useTranslations } from '../i18n/ui';
+
+const t = useTranslations('es');
+
+const benefits = [
+  {
+    icon: 'scalability',
+    title: t('benefits.scalability.title'),
+    description: t('benefits.scalability.description'),
+  },
+  {
+    icon: 'security',
+    title: t('benefits.security.title'),
+    description: t('benefits.security.description'),
+  },
+  {
+    icon: 'performance',
+    title: t('benefits.performance.title'),
+    description: t('benefits.performance.description'),
+  },
+  {
+    icon: 'customization',
+    title: t('benefits.customization.title'),
+    description: t('benefits.customization.description'),
+  },
+];
+---
+
+<section class="benefits section" id="beneficios" data-animate="section">
+  <div class="benefits__container container">
+    <div class="benefits__header">
+      <Badge text={t('benefits.badge')} />
+      <h2 class="benefits__title">{t('benefits.title')}</h2>
+      <p class="benefits__description">{t('benefits.description')}</p>
+    </div>
+
+    <div class="benefits__grid" data-animate="cards">
+      {benefits.map((benefit) => (
+        <Card variant="default" class="benefits__card">
+          <div class="benefits__card-header">
+            <div class="benefits__card-icon">
+              <Icon name={benefit.icon} size={24} />
+            </div>
+            <h3 class="benefits__card-title">{benefit.title}</h3>
+          </div>
+          <p class="benefits__card-description">{benefit.description}</p>
+          <div class="benefits__card-accent" aria-hidden="true"></div>
+        </Card>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .benefits {
+    background: var(--color-bg-secondary);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .benefits::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      var(--color-border) 50%,
+      transparent 100%
+    );
+  }
+
+  .benefits__container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-12);
+  }
+
+  .benefits__header {
+    text-align: center;
+    max-width: 600px;
+    margin-inline: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-4);
+  }
+
+  .benefits__title {
+    font-size: var(--text-4xl);
+    font-weight: var(--font-bold);
+    line-height: var(--leading-tight);
+  }
+
+  .benefits__description {
+    font-size: var(--text-lg);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+  }
+
+  .benefits__grid {
+    display: grid;
+    gap: var(--space-6);
+  }
+
+  :global(.benefits__card) {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .benefits__card-header {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    margin-bottom: var(--space-4);
+  }
+
+  .benefits__card-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background: var(--color-bg-tertiary);
+    border-radius: var(--radius-lg);
+    color: var(--color-accent-purple);
+    transition: all var(--duration-normal) var(--ease-out);
+  }
+
+  :global(.benefits__card:hover) .benefits__card-icon {
+    background: rgba(139, 92, 246, 0.15);
+    color: var(--color-accent-purple);
+    box-shadow: var(--glow-purple);
+    transform: scale(1.05);
+  }
+
+  .benefits__card-title {
+    font-size: var(--text-xl);
+    font-weight: var(--font-semibold);
+    color: var(--color-text-primary);
+  }
+
+  .benefits__card-description {
+    font-size: var(--text-base);
+    color: var(--color-text-tertiary);
+    line-height: var(--leading-relaxed);
+  }
+
+  .benefits__card-accent {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--color-accent-gradient);
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform var(--duration-normal) var(--ease-out);
+  }
+
+  :global(.benefits__card:hover) .benefits__card-accent {
+    transform: scaleX(1);
+  }
+
+  @media (min-width: 640px) {
+    .benefits__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .benefits__grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+</style>

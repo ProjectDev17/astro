@@ -1,0 +1,159 @@
+---
+export interface Props {
+  variant?: 'primary' | 'secondary' | 'ghost';
+  size?: 'sm' | 'md' | 'lg';
+  href?: string;
+  class?: string;
+  fullWidth?: boolean;
+  id?: string;
+}
+
+const { 
+  variant = 'primary', 
+  size = 'md', 
+  href, 
+  class: className = '',
+  fullWidth = false,
+  id
+} = Astro.props;
+
+const Tag = href ? 'a' : 'button';
+
+const classes = [
+  'btn',
+  `btn--${variant}`,
+  `btn--${size}`,
+  fullWidth && 'btn--full',
+  className
+].filter(Boolean).join(' ');
+---
+
+<Tag 
+  href={href} 
+  class={classes}
+  id={id}
+  data-animate="button"
+>
+  <span class="btn__content">
+    <slot />
+  </span>
+  <span class="btn__glow" aria-hidden="true"></span>
+</Tag>
+
+<style>
+  .btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    font-family: var(--font-sans);
+    font-weight: var(--font-semibold);
+    text-decoration: none;
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    overflow: hidden;
+    transition: all var(--duration-normal) var(--ease-out);
+    isolation: isolate;
+  }
+
+  .btn__content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .btn__glow {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity var(--duration-normal) var(--ease-out);
+    z-index: 0;
+  }
+
+  /* Sizes */
+  .btn--sm {
+    padding: var(--space-2) var(--space-4);
+    font-size: var(--text-sm);
+  }
+
+  .btn--md {
+    padding: var(--space-3) var(--space-6);
+    font-size: var(--text-base);
+  }
+
+  .btn--lg {
+    padding: var(--space-4) var(--space-8);
+    font-size: var(--text-lg);
+  }
+
+  .btn--full {
+    width: 100%;
+  }
+
+  /* Primary Variant */
+  .btn--primary {
+    background: var(--color-accent-gradient);
+    color: var(--color-bg-primary);
+    border: none;
+  }
+
+  .btn--primary .btn__glow {
+    background: linear-gradient(135deg, 
+      rgba(0, 212, 255, 0.4) 0%, 
+      rgba(139, 92, 246, 0.4) 100%
+    );
+    filter: blur(20px);
+  }
+
+  .btn--primary:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--glow-mixed);
+  }
+
+  .btn--primary:hover .btn__glow {
+    opacity: 1;
+  }
+
+  .btn--primary:active {
+    transform: translateY(0);
+  }
+
+  /* Secondary Variant */
+  .btn--secondary {
+    background: transparent;
+    color: var(--color-text-primary);
+    border: 1px solid var(--color-border);
+    backdrop-filter: blur(8px);
+  }
+
+  .btn--secondary:hover {
+    border-color: var(--color-accent-cyan);
+    background: rgba(0, 212, 255, 0.05);
+    transform: translateY(-2px);
+  }
+
+  .btn--secondary:active {
+    transform: translateY(0);
+  }
+
+  /* Ghost Variant */
+  .btn--ghost {
+    background: transparent;
+    color: var(--color-text-secondary);
+    border: none;
+    padding-inline: var(--space-2);
+  }
+
+  .btn--ghost:hover {
+    color: var(--color-accent-cyan);
+  }
+
+  /* Focus States */
+  .btn:focus-visible {
+    outline: 2px solid var(--color-accent-cyan);
+    outline-offset: 2px;
+  }
+</style>

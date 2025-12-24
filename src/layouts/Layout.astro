@@ -1,0 +1,289 @@
+---
+import '../styles/global.css';
+import Navbar from '../components/common/Navbar.astro';
+import Footer from '../components/common/Footer.astro';
+import WhatsAppButton from '../components/common/WhatsAppButton.astro';
+
+export interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { 
+  title = 'DigitalCRM - Software a la Medida',
+  description = 'Desarrollamos soluciones CRM personalizadas que automatizan procesos, integran sistemas y potencian tu crecimiento con inteligencia artificial.'
+} = Astro.props;
+
+const siteUrl = 'https://digitalcrm.com';
+const ogImage = `${siteUrl}/og-image.png`;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#0a0a0f" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={siteUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={siteUrl} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={ogImage} />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    
+    <!-- Fonts Preload -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link 
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" 
+      rel="stylesheet" 
+    />
+    
+  </head>
+  <body>
+    <Navbar />
+    <main id="main-content">
+      <slot />
+    </main>
+    <Footer />
+    <WhatsAppButton />
+    
+    <!-- GSAP - Loaded async for performance -->
+    <script>
+      // Lazy load GSAP only when needed
+      const loadGSAP = async () => {
+        const gsapModule = await import('gsap');
+        const { ScrollTrigger } = await import('gsap/ScrollTrigger');
+        
+        const gsap = gsapModule.default;
+        gsap.registerPlugin(ScrollTrigger);
+        
+        // Initialize animations
+        initAnimations(gsap, ScrollTrigger);
+      };
+
+      function initAnimations(gsap: any, ScrollTrigger: any) {
+        // Check for reduced motion preference
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (prefersReducedMotion) {
+          // Make all elements visible without animation
+          gsap.set('[data-animate="section"], [data-animate="card"], [data-animate="step"]', {
+            opacity: 1,
+            y: 0,
+            x: 0
+          });
+          return;
+        }
+
+        // Hero Animation Timeline
+        const heroTimeline = gsap.timeline({ delay: 0.2 });
+        
+        heroTimeline
+          .from('[data-hero="badge"]', {
+            opacity: 0,
+            y: 20,
+            duration: 0.6,
+            ease: 'power3.out'
+          })
+          .from('[data-hero="title"] .word', {
+            opacity: 0,
+            y: 60,
+            rotationX: -45,
+            stagger: 0.1,
+            duration: 0.8,
+            ease: 'power3.out'
+          }, '-=0.3')
+          .from('[data-hero="description"]', {
+            opacity: 0,
+            y: 30,
+            duration: 0.6,
+            ease: 'power3.out'
+          }, '-=0.4')
+          .from('[data-hero="cta"] > *', {
+            opacity: 0,
+            y: 20,
+            stagger: 0.1,
+            duration: 0.5,
+            ease: 'power3.out'
+          }, '-=0.3')
+          .from('[data-hero="visual"]', {
+            opacity: 0,
+            scale: 0.8,
+            duration: 1,
+            ease: 'power3.out'
+          }, '-=0.6');
+
+        // Scroll Animations for Sections
+        gsap.utils.toArray('[data-animate="section"]').forEach((section: any) => {
+          gsap.fromTo(section, 
+            { opacity: 0, y: 60 },
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.8,
+              ease: 'power3.out',
+              scrollTrigger: {
+                trigger: section,
+                start: 'top 85%',
+                once: true
+              }
+            }
+          );
+        });
+
+        // Cards Stagger Animation - Fixed version
+        gsap.utils.toArray('[data-animate="cards"]').forEach((container: any) => {
+          const cards = container.querySelectorAll('[data-animate="card"]');
+          
+          if (cards.length > 0) {
+            // Set initial state
+            gsap.set(cards, { opacity: 0, y: 40 });
+            
+            // Animate to final state
+            ScrollTrigger.create({
+              trigger: container,
+              start: 'top 80%',
+              once: true,
+              onEnter: () => {
+                gsap.to(cards, {
+                  opacity: 1,
+                  y: 0,
+                  stagger: 0.1,
+                  duration: 0.6,
+                  ease: 'power3.out'
+                });
+              }
+            });
+          }
+        });
+
+        // Steps Animation
+        gsap.utils.toArray('[data-animate="step"]').forEach((step: any, index: number) => {
+          const xOffset = index % 2 === 0 ? -40 : 40;
+          
+          gsap.fromTo(step,
+            { opacity: 0, x: xOffset },
+            {
+              opacity: 1,
+              x: 0,
+              duration: 0.6,
+              ease: 'power3.out',
+              scrollTrigger: {
+                trigger: step,
+                start: 'top 85%',
+                once: true
+              }
+            }
+          );
+        });
+
+        // Floating Animation for Hero Visual Elements
+        gsap.utils.toArray('[data-animate="float"]').forEach((element: any, index: number) => {
+          gsap.to(element, {
+            y: -15,
+            duration: 2.5 + (index * 0.3),
+            ease: 'power1.inOut',
+            yoyo: true,
+            repeat: -1,
+            delay: index * 0.5
+          });
+        });
+
+        // Progress Line Animation
+        gsap.utils.toArray('[data-animate="progress-line"]').forEach((line: any) => {
+          gsap.fromTo(line,
+            { scaleY: 0 },
+            {
+              scaleY: 1,
+              transformOrigin: 'top center',
+              scrollTrigger: {
+                trigger: line,
+                start: 'top 80%',
+                end: 'bottom 20%',
+                scrub: 1
+              }
+            }
+          );
+        });
+
+        // Navbar scroll effect
+        const navbar = document.querySelector('[data-animate="navbar"]');
+        if (navbar) {
+          ScrollTrigger.create({
+            trigger: document.body,
+            start: 'top -80px',
+            onUpdate: (self: any) => {
+              if (self.direction === 1) {
+                navbar.classList.add('navbar--scrolled');
+              } else if (window.scrollY < 80) {
+                navbar.classList.remove('navbar--scrolled');
+              }
+            }
+          });
+        }
+
+        // Button hover animations
+        document.querySelectorAll('[data-animate="button"]').forEach((button) => {
+          button.addEventListener('mouseenter', () => {
+            gsap.to(button, {
+              scale: 1.02,
+              duration: 0.2,
+              ease: 'power2.out'
+            });
+          });
+          
+          button.addEventListener('mouseleave', () => {
+            gsap.to(button, {
+              scale: 1,
+              duration: 0.2,
+              ease: 'power2.out'
+            });
+          });
+        });
+
+        // Stats counter animation
+        gsap.utils.toArray('[data-animate="counter"]').forEach((counter: any) => {
+          const target = parseInt(counter.getAttribute('data-value') || '0');
+          
+          ScrollTrigger.create({
+            trigger: counter,
+            start: 'top 80%',
+            onEnter: () => {
+              gsap.to(counter, {
+                innerText: target,
+                duration: 2,
+                snap: { innerText: 1 },
+                ease: 'power2.out'
+              });
+            },
+            once: true
+          });
+        });
+      }
+
+      // Load GSAP when DOM is ready
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', loadGSAP);
+      } else {
+        loadGSAP();
+      }
+    </script>
+  </body>
+</html>

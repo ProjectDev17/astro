@@ -1,0 +1,267 @@
+---
+import Badge from '../components/ui/Badge.astro';
+import { useTranslations } from '../i18n/ui';
+
+const t = useTranslations('es');
+
+const stats = [
+  { value: t('whatIs.stat1.value'), label: t('whatIs.stat1.label') },
+  { value: t('whatIs.stat2.value'), label: t('whatIs.stat2.label') },
+  { value: t('whatIs.stat3.value'), label: t('whatIs.stat3.label') },
+];
+---
+
+<section class="what-is section" id="que-es" data-animate="section">
+  <div class="what-is__container container">
+    <div class="what-is__content">
+      <Badge text={t('whatIs.badge')} />
+      
+      <h2 class="what-is__title">{t('whatIs.title')}</h2>
+      
+      <p class="what-is__description">{t('whatIs.description')}</p>
+
+      <div class="what-is__stats" data-animate="cards">
+        {stats.map((stat) => (
+          <div class="what-is__stat" data-animate="card">
+            <span class="what-is__stat-value gradient-text">{stat.value}</span>
+            <span class="what-is__stat-label">{stat.label}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <div class="what-is__visual">
+      <div class="what-is__visual-card">
+        <div class="what-is__visual-screen">
+          <!-- Dashboard mockup -->
+          <div class="what-is__dashboard">
+            <div class="what-is__dashboard-header">
+              <div class="what-is__dashboard-dot"></div>
+              <div class="what-is__dashboard-dot"></div>
+              <div class="what-is__dashboard-dot"></div>
+            </div>
+            <div class="what-is__dashboard-content">
+              <div class="what-is__dashboard-sidebar">
+                <div class="what-is__dashboard-nav-item"></div>
+                <div class="what-is__dashboard-nav-item what-is__dashboard-nav-item--active"></div>
+                <div class="what-is__dashboard-nav-item"></div>
+                <div class="what-is__dashboard-nav-item"></div>
+              </div>
+              <div class="what-is__dashboard-main">
+                <div class="what-is__dashboard-chart">
+                  <div class="what-is__dashboard-bar" style="--height: 60%"></div>
+                  <div class="what-is__dashboard-bar" style="--height: 80%"></div>
+                  <div class="what-is__dashboard-bar" style="--height: 45%"></div>
+                  <div class="what-is__dashboard-bar" style="--height: 90%"></div>
+                  <div class="what-is__dashboard-bar" style="--height: 70%"></div>
+                </div>
+                <div class="what-is__dashboard-metrics">
+                  <div class="what-is__dashboard-metric"></div>
+                  <div class="what-is__dashboard-metric"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="what-is__visual-glow" aria-hidden="true"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .what-is {
+    background: var(--color-bg-primary);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .what-is__container {
+    display: grid;
+    gap: var(--space-12);
+    align-items: center;
+  }
+
+  .what-is__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .what-is__title {
+    font-size: var(--text-4xl);
+    font-weight: var(--font-bold);
+    line-height: var(--leading-tight);
+  }
+
+  .what-is__description {
+    font-size: var(--text-lg);
+    color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
+    max-width: 540px;
+  }
+
+  .what-is__stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-4);
+    margin-top: var(--space-4);
+  }
+
+  .what-is__stat {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    padding: var(--space-4);
+    background: var(--color-bg-secondary);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+    text-align: center;
+  }
+
+  .what-is__stat-value {
+    font-size: var(--text-2xl);
+    font-weight: var(--font-bold);
+  }
+
+  .what-is__stat-label {
+    font-size: var(--text-xs);
+    color: var(--color-text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+  }
+
+  /* Visual Card */
+  .what-is__visual {
+    display: flex;
+    justify-content: center;
+  }
+
+  .what-is__visual-card {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+  }
+
+  .what-is__visual-screen {
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+  }
+
+  .what-is__visual-glow {
+    position: absolute;
+    inset: -50%;
+    background: radial-gradient(
+      circle at 50% 50%,
+      rgba(0, 212, 255, 0.1) 0%,
+      transparent 50%
+    );
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  /* Dashboard Mockup */
+  .what-is__dashboard {
+    aspect-ratio: 16/10;
+  }
+
+  .what-is__dashboard-header {
+    display: flex;
+    gap: var(--space-2);
+    padding: var(--space-3);
+    background: var(--color-bg-tertiary);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .what-is__dashboard-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--color-text-muted);
+  }
+
+  .what-is__dashboard-dot:first-child { background: #ff5f57; }
+  .what-is__dashboard-dot:nth-child(2) { background: #febc2e; }
+  .what-is__dashboard-dot:nth-child(3) { background: #28c840; }
+
+  .what-is__dashboard-content {
+    display: flex;
+    height: calc(100% - 34px);
+  }
+
+  .what-is__dashboard-sidebar {
+    width: 60px;
+    padding: var(--space-3);
+    background: var(--color-bg-tertiary);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .what-is__dashboard-nav-item {
+    height: 8px;
+    background: var(--color-text-muted);
+    border-radius: var(--radius-sm);
+    opacity: 0.3;
+  }
+
+  .what-is__dashboard-nav-item--active {
+    background: var(--color-accent-cyan);
+    opacity: 1;
+  }
+
+  .what-is__dashboard-main {
+    flex: 1;
+    padding: var(--space-4);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .what-is__dashboard-chart {
+    flex: 1;
+    display: flex;
+    align-items: flex-end;
+    gap: var(--space-2);
+    padding: var(--space-3);
+    background: var(--color-bg-tertiary);
+    border-radius: var(--radius-md);
+  }
+
+  .what-is__dashboard-bar {
+    flex: 1;
+    height: var(--height);
+    background: var(--color-accent-gradient);
+    border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+    opacity: 0.8;
+  }
+
+  .what-is__dashboard-metrics {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3);
+  }
+
+  .what-is__dashboard-metric {
+    height: 40px;
+    background: var(--color-bg-tertiary);
+    border-radius: var(--radius-md);
+  }
+
+  @media (min-width: 768px) {
+    .what-is__stats {
+      max-width: 500px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .what-is__container {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-16);
+    }
+  }
+</style>
