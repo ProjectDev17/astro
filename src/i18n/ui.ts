@@ -11,6 +11,8 @@ export const ui = {
     // Navigation
     "nav.home": "Inicio",
     "nav.services": "Servicios",
+    "nav.projects": "Proyectos",
+    "nav.clients": "Clientes",
     "nav.howItWorks": "Cómo Funciona",
     "nav.benefits": "Beneficios",
     "nav.contact": "Contacto",
@@ -139,6 +141,8 @@ export const ui = {
     // Navigation
     "nav.home": "Home",
     "nav.services": "Services",
+    "nav.projects": "Projects",
+    "nav.clients": "Clients",
     "nav.howItWorks": "How It Works",
     "nav.benefits": "Benefits",
     "nav.contact": "Contact",
